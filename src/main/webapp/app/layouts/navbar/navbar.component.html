@@ -17,6 +17,14 @@
                     </span>
                 </a>
             </li>
+            <li>
+                <a class="nav-link" routerLink="leader-board" routerLinkActive="active" (click)="collapseNavbar()">
+                    <span>
+                        <i class="fa fa-trophy"></i>
+                        <span>Leader Board</span>
+                    </span>
+                </a>
+            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_ORGANIZER']" class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
