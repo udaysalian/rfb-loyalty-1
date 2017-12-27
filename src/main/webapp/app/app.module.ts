@@ -24,6 +24,8 @@ import {
     PageRibbonComponent,
     ErrorComponent
 } from './layouts';
+import { LeaderBoardComponent } from './leader-board/leader-board.component';
+import { LocationComponent } from './leader-board/location/location.component';
 
 @NgModule({
     imports: [
@@ -42,7 +44,9 @@ import {
         NavbarComponent,
         ErrorComponent,
         PageRibbonComponent,
-        FooterComponent
+        FooterComponent,
+        LeaderBoardComponent,
+        LocationComponent
     ],
     providers: [
         ProfileService,
