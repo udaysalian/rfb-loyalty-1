@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class RfbLeaderBoardServiceImpl implements RfbLeaderBoardService {
     private final int leaderBoardSize;
     private final long eventDistance;
     private final RfbLocationRepository rfbLocationRepository;
-
+    private final DecimalFormat percentFormat;
     public RfbLeaderBoardServiceImpl(
             @Value("${spring.application.leaderBoardSize}") int leaderBoardSize,
             @Value("${spring.application.eventDistance}") long eventDistance,
@@ -35,6 +36,10 @@ public class RfbLeaderBoardServiceImpl implements RfbLeaderBoardService {
         this.leaderBoardSize = leaderBoardSize;
         this.eventDistance = eventDistance;
         this.rfbLocationRepository = rfbLocationRepository;
+        this.percentFormat = new DecimalFormat("0%");
+        percentFormat.setMinimumFractionDigits(0);
+        percentFormat.setMaximumFractionDigits(0);
+        percentFormat.setDecimalSeparatorAlwaysShown(false);
     }
 
     @Override
@@ -84,10 +89,10 @@ public class RfbLeaderBoardServiceImpl implements RfbLeaderBoardService {
 
     private Collection<RfbLeaderBoardView> findLeaders(Collection<RfbLeaderBoardView> leaderBoardRecords) {
         NavigableSet<RfbLeaderBoardView> sortedSet = new TreeSet<>(leaderBoardRecords);
-        RfbLeaderBoardView leader = sortedSet.first();
+        RfbLeaderBoardView leader = sortedSet.last();
         List<RfbLeaderBoardView> leaders = new ArrayList<>();
-        sortedSet.stream().filter(view -> leaders.size() < leaderBoardSize).forEach(view -> {
-            view.setPercent(leader.getDistance());
+        sortedSet.descendingSet().stream().filter(view -> leaders.size() < leaderBoardSize).forEach(view -> {
+            view.setPercent(leader.getDistance(), percentFormat);
             leaders.add(view);
         });
         return leaders;

@@ -17,6 +17,8 @@
 spring:
     application:
         name: rfbloyalty
+        leaderBoardSize: 2
+        eventDistance: 5
     jackson:
         serialization.write_dates_as_timestamps: false
     cache:
