@@ -1,0 +1,50 @@
+Assumption:
+Each entry for a user from below query means the runner completed 5Km.
+
+Example:
+user Id 1 has 2 records and user Id 2 has 4 records
+User Id 2 would be the leader with 20Km and User Id 1 would be second place with 10Km.
+
+Design
+The number of records will counted and multiplied by 5Km to get total distance.
+We can convert to standard units at the front-end and provide the user a way to switch between imperial and metric system
+The back end will do the heavy lifting to get the data and convert it into a view model that the front end can just display
+This will allow the front-end to make a single api call and the server can execute the joined query or perform three separate
+queries if the joined query is not possible
+The front end only needs to display the users name (first and last or just first or just last if one or the other is omitted)
+and the distance.
+Back end will deal with null values for fist name and/or last name
+If both the first name and last name are null user name will be 'First-Unk Last-Unk'; hopefully this state is not possible but
+we will handle it anyway.
+If there haven't been any events for a site the page should display a message that there have been no events
+
+Model view will be [
+    {
+        userId: 1,
+        runnerName: 'John Doe',
+        distance: 20
+    },
+    {
+        userId: 2,
+        runnerName: 'Jane',
+        distance: 15
+    },
+    {
+        userId: 3,
+        runnerName: The Big Lebowski,
+        distance: 5
+    }
+]
+
+LeaderBoardView.java will implement Comparable on the distance field and equals/hashCode on the userId
+Long userId
+String name
+Long distance
+
+Computing the leader will be done by iterating over the collection of RfbLocation, converting them into
+ LeaderBoardView and putting them into a SortedSet.  The set will be checked for the presence of the item.  If the
+ item already exists in the set the item will be retrieved and the distance will be increased by distance value.  If the item
+ does not exist in the Set the record will be added to the Set.  The distance value is set to 5Km and can be configured
+ via spring.application.eventDistance.
+
+ The collection will then be reduced to the leader board size which can configured via spring.application.leaderBoardSize

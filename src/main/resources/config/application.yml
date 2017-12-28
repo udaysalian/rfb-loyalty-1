@@ -23,6 +23,8 @@ management:
 spring:
     application:
         name: rfbloyalty
+        leaderBoardSize: 20
+        eventDistance: 5
     profiles:
         # The commented value for `active` can be replaced with valid Spring profiles to load.
         # Otherwise, it will be filled in by gradle when building the WAR file
