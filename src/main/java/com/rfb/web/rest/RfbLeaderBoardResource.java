@@ -28,7 +28,7 @@ public class RfbLeaderBoardResource {
     }
 
     /**
-     * GET  /rfb-leaderBoard/:locationId: get the members of the leader board for a given location id
+     * GET  /rfb-leaderBoard/:locationId get the members of the leader board for a given location id
      *
      * @param locationId the location to create a leader board view
      * @return the ResponseEntity with status 200 (OK) and with body of LeaderBoardView, or with status 404 (Not Found)
