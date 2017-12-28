@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './leader-board.component.html',
   styles: []
 })
-export class LeaderBoardComponent implements OnInit {
+export class RfbloyaltyLeaderBoardComponent implements OnInit {
 
   constructor() { }
 

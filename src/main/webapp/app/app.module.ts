@@ -9,6 +9,7 @@ import { RfbloyaltyHomeModule } from './home/home.module';
 import { RfbloyaltyAdminModule } from './admin/admin.module';
 import { RfbloyaltyAccountModule } from './account/account.module';
 import { RfbloyaltyEntityModule } from './entities/entity.module';
+import { RfbloyaltyLeaderBoardModule } from './leader-board/leader-board.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
@@ -24,7 +25,7 @@ import {
     PageRibbonComponent,
     ErrorComponent
 } from './layouts';
-import { LeaderBoardComponent } from './leader-board/leader-board.component';
+import { RfbloyaltyLeaderBoardComponent } from './leader-board/leader-board.component';
 import { LocationComponent } from './leader-board/location/location.component';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { LocationComponent } from './leader-board/location/location.component';
         RfbloyaltyAdminModule,
         RfbloyaltyAccountModule,
         RfbloyaltyEntityModule,
+        RfbloyaltyLeaderBoardModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -45,7 +47,6 @@ import { LocationComponent } from './leader-board/location/location.component';
         ErrorComponent,
         PageRibbonComponent,
         FooterComponent,
-        LeaderBoardComponent,
         LocationComponent
     ],
     providers: [
