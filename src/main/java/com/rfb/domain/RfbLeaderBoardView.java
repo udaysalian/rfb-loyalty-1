@@ -9,6 +9,7 @@ public class RfbLeaderBoardView implements Comparable<RfbLeaderBoardView> {
     private final Long userId;
     private final String name;
     private Long distance;
+    private String percent;
 
     /**
      * Create a record with the first distance of 5Km
@@ -39,6 +40,15 @@ public class RfbLeaderBoardView implements Comparable<RfbLeaderBoardView> {
 
     public Long getDistance() {
         return distance;
+    }
+
+    public String getPercent() {
+        return percent;
+    }
+
+    public void setPercent(long leaderDistance) {
+        double percentDistance = Math.round((double) distance / (double) leaderDistance);
+        percent = String.format("%f%", percentDistance);
     }
 
     @Override

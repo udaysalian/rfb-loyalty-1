@@ -22,17 +22,20 @@ Model view will be [
     {
         userId: 1,
         runnerName: 'John Doe',
-        distance: 20
+        distance: 20,
+        percent: 100%
     },
     {
         userId: 2,
         runnerName: 'Jane',
-        distance: 15
+        distance: 15,
+        percent: 75%
     },
     {
         userId: 3,
         runnerName: The Big Lebowski,
-        distance: 5
+        distance: 5,
+        percent: 25%
     }
 ]
 

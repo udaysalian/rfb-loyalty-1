@@ -84,8 +84,12 @@ public class RfbLeaderBoardServiceImpl implements RfbLeaderBoardService {
 
     private Collection<RfbLeaderBoardView> findLeaders(Collection<RfbLeaderBoardView> leaderBoardRecords) {
         NavigableSet<RfbLeaderBoardView> sortedSet = new TreeSet<>(leaderBoardRecords);
+        RfbLeaderBoardView leader = sortedSet.first();
         List<RfbLeaderBoardView> leaders = new ArrayList<>();
-        sortedSet.stream().filter(view -> leaders.size() < leaderBoardSize).forEach(leaders::add);
+        sortedSet.stream().filter(view -> leaders.size() < leaderBoardSize).forEach(view -> {
+            view.setPercent(leader.getDistance());
+            leaders.add(view);
+        });
         return leaders;
     }
 }
