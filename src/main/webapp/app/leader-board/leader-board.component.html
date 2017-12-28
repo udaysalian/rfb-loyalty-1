@@ -1,3 +1,7 @@
-<p>
-  leader-board works!
-</p>
+<div class="form-group">
+    <label class="form-control-label" for="leaderBoardLocation">Leader Board Location</label>
+    <select class="form-control" id="leaderBoardLocation" name="homeLocation" [(ngModel)]="settingsAccount.homeLocation" #homeLocation="ngModel" required>
+        <option [ngValue]="null"></option>
+        <option [ngValue]="location.id" *ngFor="let location of locations">{{location.locationName}}</option>
+    </select>
+</div>

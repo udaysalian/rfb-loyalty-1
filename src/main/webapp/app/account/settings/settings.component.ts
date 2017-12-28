@@ -55,6 +55,8 @@ export class SettingsComponent implements OnInit {
         };
     }
 
+    // TODO combine this logic with the logic in settings.components.ts so it isn't duplicated
+    // TODO convert into type ahead to scale with location growth
     loadLocations() {
         this.locationService.query({
             page: 0,
