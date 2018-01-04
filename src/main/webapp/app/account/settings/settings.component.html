@@ -72,14 +72,8 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="homeLocation">Home Location</label>
-                    <select class="form-control" id="homeLocation" name="homeLocation" [(ngModel)]="settingsAccount.homeLocation" #homeLocation="ngModel" required>
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="location.id" *ngFor="let location of locations">{{location.locationName}}</option>
-                    </select>
-                    <!--<small class="form-text text-danger" *ngIf="homeLocation.errors.required">Your Home Location is required.</small>-->
-                </div>
+                <jhi-rfbloyalty-location-pull-down pullDownLabel="Home Location" [locations]="locations" [account]="settingsAccount"
+                        [required]="false"></jhi-rfbloyalty-location-pull-down>
                 <button type="submit" [disabled]="settingsForm.form.invalid" class="btn btn-primary">Save</button>
             </form>
         </div>

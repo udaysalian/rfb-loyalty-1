@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label class="form-control-label" for="location">{{pullDownLabel}}</label>
+    <select class="form-control" id="location" name="location" [(ngModel)]="account.homeLocation" #location="ngModel" required>
+        <option [ngValue]="null"></option>
+        <option [ngValue]="location.id" *ngFor="let location of locations">{{location.locationName}}</option>
+    </select>
+    <small class="form-text text-danger" *ngIf="required">Your Location is required.</small>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { RfbloyaltyLocationPullDownComponent } from '../rfbloyalty-location-pull-down/rfbloyalty-location-pull-down.component';
 
 import {
     RfbloyaltySharedLibsModule,
@@ -26,7 +27,8 @@ import {
     declarations: [
         JhiSocialComponent,
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        RfbloyaltyLocationPullDownComponent
     ],
     providers: [
         LoginService,
@@ -42,6 +44,7 @@ import {
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [
+        RfbloyaltyLocationPullDownComponent,
         RfbloyaltySharedCommonModule,
         JhiSocialComponent,
         JhiLoginModalComponent,

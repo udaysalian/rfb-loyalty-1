@@ -29,14 +29,9 @@
                 <form name="checkinForm" role="form" novalidate (ngSubmit)="checkIn()" #checkinForm="ngForm">
                     <div class="modal-body">
                         <jhi-alert-error></jhi-alert-error>
-                        <div class="form-group">
-                            <label class="form-control-label" for="field_location">Location</label>
-                            <select class="form-control" id="field_location" name="location" [(ngModel)]="model.location" #location="ngModel" required>
-                                <option [ngValue]="null"></option>
-                                <option [ngValue]="location.id" *ngFor="let location of locations">{{location.locationName}}</option>
-                            </select>
-                            <small *ngIf="!model.location"><a href="/#/settings">SET HOME LOCATION</a></small>
-                        </div>
+                        <jhi-rfbloyalty-location-pull-down pullDownLabel="Location" [locations]="locations" [account]="account"
+                                                           [required]="true"></jhi-rfbloyalty-location-pull-down>
+                        <small *ngIf="!model.location"><a href="/#/settings">SET HOME LOCATION</a></small>
                         <div class="form-group">
                             <label class="form-control-label" for="field_eventCode">Event Code</label>
                             <input type="text" class="form-control" name="eventCode" id="field_eventCode" [(ngModel)]="model.eventCode" #eventCode="ngModel" required/>
