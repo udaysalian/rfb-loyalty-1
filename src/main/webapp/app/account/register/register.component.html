@@ -47,11 +47,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="homeLocation" class="form-control-label">Home Location</label>
-                    <select class="form-control" id="homeLocation" name="homeLocation" [(ngModel)]="registerAccount.homeLocation" #homeLocation="ngModel" required>
-                        <option [value]="null" [selected]="">Select Home Location</option>
-                        <option *ngFor="let location of locations" [value]="location.id">{{location.locationName}}</option>
-                    </select>
+                    <jhi-rfbloyalty-location-pull-down
+                            pullDownLabel="Home Location" [locations]="locations" [account]="registerAccount"
+                            [required]="true"></jhi-rfbloyalty-location-pull-down>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="email">Email</label>
