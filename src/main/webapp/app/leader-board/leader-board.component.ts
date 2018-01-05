@@ -3,7 +3,10 @@ import { RfbLocation } from '../entities/rfb-location/rfb-location.model';
 import { RfbLocationService } from '../entities/rfb-location/rfb-location.service';
 
 import { Principal, ResponseWrapper } from '../shared';
+import { RfbloyaltyLocationPullDownComponent } from '../rfbloyalty-location-pull-down/rfbloyalty-location-pull-down.component';
 
+// TODO when on the leader board and signing in the pull down does not get refreshed to the users home location
+// Bug or feature?
 @Component({
   selector: 'jhi-leader-board',
   templateUrl: './leader-board.component.html',
@@ -11,7 +14,7 @@ import { Principal, ResponseWrapper } from '../shared';
 })
 export class RfbloyaltyLeaderBoardComponent implements OnInit {
 
-    settingsAccount: any;
+    account: any;
     locations: RfbLocation[];
 
     constructor(
@@ -20,23 +23,26 @@ export class RfbloyaltyLeaderBoardComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.principal.identity().then((account) => {
-            this.settingsAccount = this.copyAccount(account);
-        });
+        // init the home location on the account so the console doesn't log a bunch of undefined errors while
+        // waiting for the principal to load the account information, also automatically takes care of the use
+        // cases where account is null or home location is not set on the account by defaulting the home location
+        this.setDefaultHomeLocation();
+        this.loadAccountInformation();
         this.loadLocations();
     }
 
-    copyAccount(account) {
-        return {
-            activated: account.activated,
-            email: account.email,
-            firstName: account.firstName,
-            langKey: account.langKey,
-            lastName: account.lastName,
-            login: account.login,
-            imageUrl: account.imageUrl,
-            homeLocation: account.homeLocation
-        };
+    private loadAccountInformation() {
+        this.principal.identity().then((account) => {
+            if (account !== null && account.homeLocation !== null) {
+                this.account = account;
+            }
+        });
+    }
+
+    private setDefaultHomeLocation() {
+        this.account = {
+            homeLocation: 1
+        }
     }
 
     loadLocations() {
