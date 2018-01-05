@@ -4,8 +4,6 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
 
-import java.text.DecimalFormat;
-
 public class RfbLeaderBoardView implements Comparable<RfbLeaderBoardView> {
 
     private final Long userId;
@@ -48,9 +46,9 @@ public class RfbLeaderBoardView implements Comparable<RfbLeaderBoardView> {
         return percent;
     }
 
-    public void setPercent(long leaderDistance, DecimalFormat percentFormat) {
-        double percentDistance = (double) distance / (double) leaderDistance;
-        percent = percentFormat.format(percentDistance);
+    public void setPercent(long leaderDistance) {
+        double percentDistance = ((double) distance / (double) leaderDistance) * 100;
+        percent = Double.toString(percentDistance);
     }
 
     public RfbLeaderBoardView percent(String percent) {

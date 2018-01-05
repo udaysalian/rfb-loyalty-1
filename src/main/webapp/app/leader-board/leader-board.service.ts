@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Rx';
 import {SERVER_API_URL} from '../app.constants';
 
 import { ResponseWrapper } from '../shared';
+import { RfbLeader } from './leader-board.model';
 
 @Injectable()
 export class RfbloyaltyLeaderBoardService {
@@ -18,7 +19,16 @@ export class RfbloyaltyLeaderBoardService {
     }
 
     private convertResponse(res: Response): ResponseWrapper {
-        const jsonResponse = res.json();
+        const jsonResponse = this.convertToRfbLeader(res.json());
         return new ResponseWrapper(res.headers, jsonResponse, res.status);
+    }
+
+    private convertToRfbLeader(json: any[]): RfbLeader[] {
+        const rfbLeaders: RfbLeader[] = [];
+        json.forEach(function(leader) {
+            const miles = 0.621371 * leader.distance;
+            rfbLeaders.push(new RfbLeader(leader.userId, leader.name, leader.percent, leader.distance, miles));
+        });
+        return rfbLeaders;
     }
 }

@@ -67,8 +67,8 @@ public class RfbLeaderBoardServiceImplIntTest {
         userRegistersForEvent(RUNNER_ID, newEvent1);
         userRegistersForEvent(RUNNER_ID, newEvent2);
         userRegistersForEvent(ORGANIZER_ID, newEvent1);
-        RfbLeaderBoardView johnnyExpected = new RfbLeaderBoardView(JOHNNY_ID, "johnny", 15).percent("100%");
-        RfbLeaderBoardView runnerExpected = new RfbLeaderBoardView(RUNNER_ID, "runner", 10).percent("66%");
+        RfbLeaderBoardView johnnyExpected = new RfbLeaderBoardView(JOHNNY_ID, "johnny", 15).percent("100.0");
+        RfbLeaderBoardView runnerExpected = new RfbLeaderBoardView(RUNNER_ID, "runner", 10).percent("66.66666666666666");
 
         //Act
         Collection<RfbLeaderBoardView> actual = rfbLeaderBoardService.getLeaderBoardViewForLocation(EVENT_LOCATION);
@@ -78,7 +78,11 @@ public class RfbLeaderBoardServiceImplIntTest {
         assertTrue("Johnny Leader Board record did not match " + johnnyExpected, actual.contains(johnnyExpected));
         assertTrue("Runner Leader Board record did not match " + runnerExpected, actual.contains(runnerExpected));
         Iterator<RfbLeaderBoardView> iterator = actual.iterator();
-        assertEquals("Leader Board entries are not in the correct order", johnnyExpected, iterator.next());
-        assertEquals("Second place entry was not found where it was expected", runnerExpected, iterator.next());
+        RfbLeaderBoardView johnnyActual = iterator.next();
+        RfbLeaderBoardView runnerActual = iterator.next();
+        assertEquals("Leader Board entries are not in the correct order", johnnyExpected, johnnyActual);
+        assertEquals("Second place entry was not found where it was expected", runnerExpected, runnerActual);
+        assertEquals("Percentage was not formatted correctly", johnnyExpected.getPercent(), johnnyActual.getPercent());
+        assertEquals("Percentage was not formatted correctly", runnerExpected.getPercent(), runnerActual.getPercent());
     }
 }

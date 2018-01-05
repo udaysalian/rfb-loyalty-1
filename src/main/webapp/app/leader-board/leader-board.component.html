@@ -1,6 +1,20 @@
 <jhi-rfbloyalty-location-pull-down
+        (change)="onSelect(account.homeLocation)"
         pullDownLabel="Leader Board Location"
         [locations]="locations"
         [account]="account"
         [required]="false">
 </jhi-rfbloyalty-location-pull-down>
+<jhi-alert></jhi-alert>
+<div class="col-md-12" *ngFor="let leader of leaders">
+    <div class="row col-md-12">
+        <p class="col-md-12">
+            <ngb-progressbar
+                type="success"
+                [value]="leader.percent"
+                [striped]="true"
+                [animated]="true">{{leader.name}} - {{leader.distance}} Km ({{leader.miles | number : '1.1-1'}} Miles)
+            </ngb-progressbar>
+        </p>
+    </div>
+</div>
