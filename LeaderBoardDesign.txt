@@ -7,15 +7,15 @@ User Id 2 would be the leader with 20Km and User Id 1 would be second place with
 
 Design
 The number of records will counted and multiplied by 5Km to get total distance.
-We can convert to standard units at the front-end and provide the user a way to switch between imperial and metric system
-The back end will do the heavy lifting to get the data and convert it into a view model that the front end can just display
-This will allow the front-end to make a single api call and the server can execute the joined query or perform three separate
-queries if the joined query is not possible
-The front end only needs to display the users name (first and last or just first or just last if one or the other is omitted)
-and the distance.
-Back end will deal with null values for fist name and/or last name
-If both the first name and last name are null user name will be 'First-Unk Last-Unk'; hopefully this state is not possible but
-we will handle it anyway.
+ We can convert to standard units at the front-end and display both imperial and metric system values.
+ The back end will do the heavy lifting to get the data and convert it into a view model that the front end can just display
+ This will allow the front-end to make a single api call and the server can execute the joined query
+ The front end only needs to display the users name (first and last or just first or just last if one or the other is omitted)
+ and the distance.
+ The back end will deal with null values for fist name and/or last name
+ If both the first name and last name are null user name will be 'First-Unk Last-Unk'; hopefully this state is not possible but
+ we will handle it anyway.
+
 If there haven't been any events for a site the page should display a message that there have been no events
 
 Model view will be [
@@ -23,31 +23,58 @@ Model view will be [
         userId: 1,
         runnerName: 'John Doe',
         distance: 20,
-        percent: 100%
+        percent: 100.0
     },
     {
         userId: 2,
         runnerName: 'Jane',
         distance: 15,
-        percent: 75%
+        percent: 75.0
     },
     {
         userId: 3,
         runnerName: The Big Lebowski,
         distance: 5,
-        percent: 25%
+        percent: 25.0
     }
 ]
 
-LeaderBoardView.java will implement Comparable on the distance field and equals/hashCode on the userId
+RfbLeaderBoardView.java will implement Comparable on the distance field and equals/hashCode on the userId
 Long userId
 String name
 Long distance
+String percent
 
 Computing the leader will be done by iterating over the collection of RfbLocation, converting them into
- LeaderBoardView and putting them into a SortedSet.  The set will be checked for the presence of the item.  If the
+ RfbLeaderBoardView and putting them into a SortedSet.  The set will be checked for the presence of the item.  If the
  item already exists in the set the item will be retrieved and the distance will be increased by distance value.  If the item
  does not exist in the Set the record will be added to the Set.  The distance value is set to 5Km and can be configured
  via spring.application.eventDistance.
 
  The collection will then be reduced to the leader board size which can configured via spring.application.leaderBoardSize
+
+The front end will use progress bars to graphically display the distance a runner has completed relative to the other
+ members of the leader board.  The runner with the most distance will have their progress bar set to 100% and the rest
+ of the runners will have their percent value computed relative to the leader.
+
+Refactoring
+ Refactored the Location pull-down into a configurable component and re-used that component on the Settings,
+ User Registration, Event Attendance and the Leader Board.
+
+Requirements derived from the skype chat and lesson assigning this taks
+
+Requirements
+ Visible to all - no auth required
+ Leader board menu item in the header
+ Location drop down
+ If logged in pre-select your loc if loc is available otherwise user has to select a loc
+ List of leaders
+ Show list of top 20 runners at that location
+ Get data from event attendence table
+ No events (i.e. leader board will be empty) for location handled
+ Imperial/Metric units conversion
+
+Tips:
+ Select drop down and load with all locations
+ change event listener to call leader board service
+ populate a display table
