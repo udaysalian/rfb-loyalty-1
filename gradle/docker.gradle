@@ -38,7 +38,7 @@ task copyDockerFiles(type: Copy) {
     exclude "**/*.yml"
 }
 
-def rfbImageName = 'springframeworkguru/rfbloyalty'
+def rfbImageName = 'usalian/rfb-loyalty'
 
 task buildDocker(type: DockerBuildImage, dependsOn: 'copyDockerFiles') {
     description = "Package application as Docker image"
