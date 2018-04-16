@@ -23,7 +23,7 @@ docker {
     registryCredentials {
         //url default value
         //url = 'https://index.docker.io/v1/'
-        username = 'springframeworkguru'
+        username =(System.env.DOCKER_HUB_USERID)
         password = (System.env.DOCKER_HUB_PWD)
         email = 'john@springframework.guru'
     }
