@@ -38,7 +38,7 @@ task copyDockerFiles(type: Copy) {
     exclude "**/*.yml"
 }
 
-def rfbImageName = 'usalian/rfb-loyalty-1'
+def rfbImageName = 'usalian/rfb-loyalty'
 
 task buildDocker(type: DockerBuildImage, dependsOn: 'copyDockerFiles') {
     description = "Package application as Docker image"
